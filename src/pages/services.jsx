@@ -1,8 +1,8 @@
 import { toaster } from "../components/ui/toaster";
 
-export function TampilPesan(juudl, pesan) {
+export function TampilPesan(judul, pesan) {
     return toaster.create({
-        title: juudl,
+        title: judul,
         description: pesan,
         duration: 1000,
     });

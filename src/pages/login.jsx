@@ -14,9 +14,11 @@ import {
 
 import logo from "../assets/icons/logo.png";
 import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Toaster } from "../components/ui/toaster";
+import { TampilPesan } from "./services";
 
 
 const Login = () => {
@@ -24,20 +26,29 @@ const Login = () => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
+    useEffect(() => {
+        const username = localStorage.getItem("usernameLS");
+        if (username) {
+            navigate("/dashboard");
+        }
+    },[]);
+
     const handleLogin = async () => {
-        const url = "https://localhost/inventarisweb/proseslogin.php";
+        const url = "http://localhost/inventarisweb/proseslogin.php";
         const body = { username: username, password: password };
         
         try{
             const response = await axios.post(url, body);
             if (response.data.STATUS == "BERHASIL") {
-                localStorage.setItem("usenameLS", response.data.DATA[0]["username"]);
+                localStorage.setItem("usernameLS", response.data.DATA[0]["username"]);
                 localStorage.setItem("namaLS", response.data.DATA[0]["nama"]);
-                navigate("/Dashboard");
-                console.log("berhasil");
+                TampilPesan("Info", "Selamat Datang");
+                setTimeout(() => {
+                    navigate("/dashboard");
+                }, 2000);
             } else {
                 navigate("/");
-                console.log("gagal");
+                TampilPesan("Info","Username atau Password Salah");
             }
         } catch (error) {
             console.log(error);
@@ -45,7 +56,6 @@ const Login = () => {
     };
     return (
         <>
-            <Toaster/>
             <Box 
                 backgroundColor = "teal"
                 width = "100dvw"
@@ -55,6 +65,7 @@ const Login = () => {
                 justifyContent="center"
                 alignItems="center"
             >
+                <Toaster/>
                 <CardRoot borderRadius = "20px" backgroundColor = "white" color = "black">
                     <CardHeader>
                         <CardTitle>
