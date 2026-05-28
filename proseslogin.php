@@ -4,7 +4,7 @@
     //saat menggunakan POST
     $data = json_decode(file_get_contents('php://input'), true);
 
-    $query="SELECT * FROM pengguna WHERE username = ? AND password = ?";
+    $query="SELECT * FROM tbluser WHERE username = ? AND password = ?";
 
     $stmt = mysqli_prepare($conn, $query);
 

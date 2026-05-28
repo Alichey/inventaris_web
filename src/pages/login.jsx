@@ -15,6 +15,9 @@ import {
 import logo from "../assets/icons/logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Toaster } from "../components/ui/toaster";
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -42,6 +45,7 @@ const Login = () => {
     };
     return (
         <>
+            <Toaster/>
             <Box 
                 backgroundColor = "teal"
                 width = "100dvw"
