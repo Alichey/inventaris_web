@@ -1,11 +1,10 @@
 import { Box, Button, Text } from "@chakra-ui/react";
-
 import { BiLogOut } from "react-icons/bi";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useColorMode } from "../components/ui/color-mode";
 import { CiSun } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import person from "../assets/icons/kucing-menjulur-kucing-lidah.png";
 import MyDrawer from "./mydrawer";
 
@@ -44,6 +43,7 @@ const Dashboard = () => {
             <BiLogOut/>
           </Button>
         </Box>
+        <Outlet/>
       </Box>
       </>
     );
